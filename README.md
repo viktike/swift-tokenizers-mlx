@@ -90,7 +90,7 @@ import MLXEmbeddersHFAPI
 
 let container = try await loadModelContainer(
     from: HubClient.default,
-    configuration: .nomic_text_v1_5
+    configuration: EmbedderRegistry.qwen3_embedding
 )
 ```
 

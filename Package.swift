@@ -30,8 +30,10 @@ var packageTargets: [Target] = [
         name: "Benchmarks",
         dependencies: [
             "MLXLMTokenizers",
+            "MLXEmbeddersTokenizers",
             "TestHelpers",
             .product(name: "HFAPI", package: "swift-hf-api"),
+            .product(name: "MLXEmbedders", package: "mlx-swift-lm"),
             .product(name: "BenchmarkHelpers", package: "mlx-swift-lm"),
         ]
     ),
@@ -64,11 +66,7 @@ let package = Package(
         .trait(name: "Rust"),
     ],
     dependencies: [
-        // TODO: Switch from this pinned revision to a major-version dependency once mlx-swift-lm publishes a release that includes PR #118.
-        .package(
-            url: "https://github.com/ml-explore/mlx-swift-lm.git",
-            revision: "89de43c6c8c36f037da3db22230fa5356463b594"
-        ),
+        .package(url: "https://github.com/ml-explore/mlx-swift-lm.git", from: "3.31.3"),
         .package(
             url: "https://github.com/DePasqualeOrg/swift-tokenizers.git", from: "0.3.2",
             traits: [

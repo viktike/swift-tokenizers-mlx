@@ -1,5 +1,7 @@
 import BenchmarkHelpers
 import HFAPI
+import MLXEmbedders
+import MLXEmbeddersTokenizers
 import MLXLMTokenizers
 import TestHelpers
 import Testing
@@ -56,5 +58,39 @@ struct Benchmarks {
             using: TokenizersLoader()
         )
         stats.printSummary(label: "Embedding load (swift-tokenizers)")
+    }
+
+    @Test func embeddingConvenience() async throws {
+        let config = EmbedderRegistry.bge_micro
+        let hub = HubClient.default
+
+        // Free function loadModelContainer (downloader, default TokenizersLoader)
+        let container = try await MLXEmbeddersTokenizers.loadModelContainer(
+            from: hub, configuration: config)
+        let modelDirectory = try await container.modelDirectory
+
+        // Free function loadModel (downloader)
+        _ = try await MLXEmbeddersTokenizers.loadModel(
+            from: hub, configuration: config)
+
+        // Free function loadModelContainer (directory)
+        _ = try await MLXEmbeddersTokenizers.loadModelContainer(from: modelDirectory)
+
+        // Free function loadModel (directory)
+        _ = try await MLXEmbeddersTokenizers.loadModel(from: modelDirectory)
+
+        // EmbedderModelFactory extension loadContainer (downloader, default TokenizersLoader)
+        _ = try await EmbedderModelFactory.shared.loadContainer(
+            from: hub, configuration: config)
+
+        // EmbedderModelFactory extension load (downloader)
+        _ = try await EmbedderModelFactory.shared.load(
+            from: hub, configuration: config)
+
+        // EmbedderModelFactory extension loadContainer (directory)
+        _ = try await EmbedderModelFactory.shared.loadContainer(from: modelDirectory)
+
+        // EmbedderModelFactory extension load (directory)
+        _ = try await EmbedderModelFactory.shared.load(from: modelDirectory)
     }
 }

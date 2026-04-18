@@ -6,22 +6,23 @@ var packageTargets: [Target] = [
     .target(
         name: "MLXLMTokenizers",
         dependencies: [
-            .product(name: "MLXLMCommon", package: "mlx-swift-lm"),
+            .product(name: "MLXLMCommon", package: "vmlx-swift-lm"),
             .product(name: "Tokenizers", package: "swift-tokenizers"),
         ]
     ),
+/**
     .target(
         name: "MLXEmbeddersTokenizers",
         dependencies: [
-            .product(name: "MLXEmbedders", package: "mlx-swift-lm"),
-            .product(name: "MLXLMCommon", package: "mlx-swift-lm"),
+            .product(name: "MLXEmbedders", package: "vmlx-swift-lm"),
+            .product(name: "MLXLMCommon", package: "vmlx-swift-lm"),
             "MLXLMTokenizers",
         ]
     ),
     .target(
         name: "TestHelpers",
         dependencies: [
-            .product(name: "MLXLMCommon", package: "mlx-swift-lm"),
+            .product(name: "MLXLMCommon", package: "vmlx-swift-lm"),
             .product(name: "HFAPI", package: "swift-hf-api"),
         ],
         path: "Tests/TestHelpers"
@@ -33,8 +34,8 @@ var packageTargets: [Target] = [
             "MLXEmbeddersTokenizers",
             "TestHelpers",
             .product(name: "HFAPI", package: "swift-hf-api"),
-            .product(name: "MLXEmbedders", package: "mlx-swift-lm"),
-            .product(name: "BenchmarkHelpers", package: "mlx-swift-lm"),
+            .product(name: "MLXEmbedders", package: "vmlx-swift-lm"),
+            .product(name: "BenchmarkHelpers", package: "vmlx-swift-lm"),
         ]
     ),
     .testTarget(
@@ -43,9 +44,10 @@ var packageTargets: [Target] = [
             "MLXLMTokenizers",
             "TestHelpers",
             .product(name: "HFAPI", package: "swift-hf-api"),
-            .product(name: "IntegrationTestHelpers", package: "mlx-swift-lm"),
+            .product(name: "IntegrationTestHelpers", package: "vmlx-swift-lm"),
         ]
     ),
+**/
 ]
 
 let package = Package(
@@ -58,7 +60,7 @@ let package = Package(
     ],
     products: [
         .library(name: "MLXLMTokenizers", targets: ["MLXLMTokenizers"]),
-        .library(name: "MLXEmbeddersTokenizers", targets: ["MLXEmbeddersTokenizers"]),
+//        .library(name: "MLXEmbeddersTokenizers", targets: ["MLXEmbeddersTokenizers"]),
     ],
     traits: [
         .default(enabledTraits: ["Swift"]),
@@ -66,7 +68,7 @@ let package = Package(
         .trait(name: "Rust"),
     ],
     dependencies: [
-        .package(url: "https://github.com/ml-explore/mlx-swift-lm.git", from: "3.31.3"),
+        .package(url: "https://github.com/viktike/vmlx-swift-lm.git", branch: "new"),
         .package(
             url: "https://github.com/DePasqualeOrg/swift-tokenizers.git", from: "0.3.2",
             traits: [

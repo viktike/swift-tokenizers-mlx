@@ -10,7 +10,7 @@ var packageTargets: [Target] = [
             .product(name: "Tokenizers", package: "swift-tokenizers"),
         ]
     ),
-/**
+
     .target(
         name: "MLXEmbeddersTokenizers",
         dependencies: [
@@ -19,6 +19,7 @@ var packageTargets: [Target] = [
             "MLXLMTokenizers",
         ]
     ),
+/**
     .target(
         name: "TestHelpers",
         dependencies: [

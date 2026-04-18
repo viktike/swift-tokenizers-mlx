@@ -61,7 +61,7 @@ let package = Package(
     ],
     products: [
         .library(name: "MLXLMTokenizers", targets: ["MLXLMTokenizers"]),
-//        .library(name: "MLXEmbeddersTokenizers", targets: ["MLXEmbeddersTokenizers"]),
+        .library(name: "MLXEmbeddersTokenizers", targets: ["MLXEmbeddersTokenizers"]),
     ],
     traits: [
         .default(enabledTraits: ["Swift"]),
